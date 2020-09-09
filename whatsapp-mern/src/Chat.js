@@ -4,9 +4,9 @@ import { AttachFile, MoreVert } from "@material-ui/icons";
 import SearchOutlinedIcon from "@material-ui/icons/SearchOutlined";
 import { Avatar, IconButton } from "@material-ui/core";
 import EmojiEmotionsOutlinedIcon from "@material-ui/icons/EmojiEmotionsOutlined";
-import MicOutlinedIcon from '@material-ui/icons/MicOutlined';
+import MicOutlinedIcon from "@material-ui/icons/MicOutlined";
 
-function Chat() {
+function Chat({ messages }) {
   return (
     <div className="chat">
       <div className="chat_header">
@@ -30,11 +30,13 @@ function Chat() {
       </div>
 
       <div className="chat_body">
-        <p className="chat_message">
-          <span className="chat_name">Toto</span>
-          Halo, good mowning
-          <span className="chat_timestamp">{new Date().toUTCString()}</span>
-        </p>
+        {messages.map((messages) => (
+          <p className={`chat_message ${message.recieved && "chat_reciever"}`}>
+            <span className="chat_name">{message.name}</span>
+            Halo, good mowning
+        <span className="chat_timestamp">{message.timestamp}</span>
+          </p>
+        ))}
 
         <p className="chat_message chat_reciever">
           <span className="chat_name">Toto</span>

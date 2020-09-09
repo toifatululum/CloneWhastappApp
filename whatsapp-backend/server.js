@@ -2,6 +2,7 @@ import express from "express";
 import mongoose from "mongoose";
 import Messages from "./db.Messages.js";
 import Pusher from "pusher";
+import cors from "cors";
 
 //app config
 const app = express();
@@ -17,6 +18,7 @@ const pusher = new Pusher({
 
 //middleware
 app.use(express.json());
+app.use(cors())
 
 app.use((req, res, next) => {
   res.setHeader("Acces-Control-Allow-Origin", "*");
@@ -49,6 +51,8 @@ db.once("open", () => {
       pusher.trigger("messages", "inserted", {
         name: messageDetails.user,
         message: messageDetails.message,
+        timestamp: messageDetails.timestamp,
+        recieved: messageDetails.recieved
       });
     } else {
       console.log("Error trigger pusher");
