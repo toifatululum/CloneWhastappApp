@@ -28,7 +28,7 @@ app.use((req, res, next) => {
 
 //DB config
 const connection_url =
-  "mongodb+srv://admin:admin1701@cluster0.mptbl.mongodb.net/<whatsaapdb>?retryWrites=true&w=majority";
+  "mongodb://admin:admin1701@cluster0-shard-00-00.mptbl.mongodb.net:27017,cluster0-shard-00-01.mptbl.mongodb.net:27017,cluster0-shard-00-02.mptbl.mongodb.net:27017/whatsapp?ssl=true&replicaSet=atlas-2xyxo7-shard-0&authSource=admin&retryWrites=true&w=majority";
 mongoose.connect(connection_url, {
   useCreateIndex: true,
   useUrlParser: true,

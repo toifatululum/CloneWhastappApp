@@ -12,8 +12,8 @@ function Chat({ messages }) {
   const sendMessage = async (e) =>  {
     e.preventDefault();
 
-    await axios.post("./messages/new", {
-      messag9e:input,
+    await axios.post("/messages/new", {
+      message:input,
       name : "Demo App",
       timestamp: "just now", 
       recieved:false,
@@ -46,24 +46,18 @@ function Chat({ messages }) {
 
       <div className="chat_body">
         {messages.map((message) => (
-          <p className={`chat_message ${message.recieved && "chat_reciever"}`}>
+          <p className={`chat_message ${message.recieved ? "": "chat_reciever"}`}>
             <span className="chat_name">{message.name}</span>
-            Halo, good mowning
+            {message.message}
         <span className="chat_timestamp">{message.timestamp}</span>
           </p>
         ))}
-
-        <p className="chat_message chat_reciever">
-          <span className="chat_name">Toto</span>
-          Halo, good mowning
-          <span className="chat_timestamp">{new Date().toUTCString()}</span>
-        </p>
       </div>
 
       <div className="chat_footer">
         <EmojiEmotionsOutlinedIcon />
         <form>
-          <input value={input} onChange={e =>  setInput(e.target.vale)} type="text" placeholder="Type a message" />
+          <input value={input} onChange={e =>  setInput(e.target.value)} type="text" placeholder="Type a message" />
           <button onClick={sendMessage} type="submit">Send a message</button>
         </form>
         <MicOutlinedIcon />
