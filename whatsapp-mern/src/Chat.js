@@ -1,12 +1,27 @@
-import React from "react";
+import React, {useState} from "react";
 import "./Chat.css";
 import { AttachFile, MoreVert } from "@material-ui/icons";
 import SearchOutlinedIcon from "@material-ui/icons/SearchOutlined";
 import { Avatar, IconButton } from "@material-ui/core";
 import EmojiEmotionsOutlinedIcon from "@material-ui/icons/EmojiEmotionsOutlined";
 import MicOutlinedIcon from "@material-ui/icons/MicOutlined";
+import axios from './axios';
 
 function Chat({ messages }) {
+  const [input, setInput] =  useState("");
+  const sendMessage = async (e) =>  {
+    e.preventDefault();
+
+    await axios.post("./messages/new", {
+      messag9e:input,
+      name : "Demo App",
+      timestamp: "just now", 
+      recieved:false,
+    });
+
+
+    setInput("");
+  }
   return (
     <div className="chat">
       <div className="chat_header">
@@ -30,7 +45,7 @@ function Chat({ messages }) {
       </div>
 
       <div className="chat_body">
-        {messages.map((messages) => (
+        {messages.map((message) => (
           <p className={`chat_message ${message.recieved && "chat_reciever"}`}>
             <span className="chat_name">{message.name}</span>
             Halo, good mowning
@@ -48,8 +63,8 @@ function Chat({ messages }) {
       <div className="chat_footer">
         <EmojiEmotionsOutlinedIcon />
         <form>
-          <input type="text" placeholder="Type a message" />
-          <button type="submit">Send a message</button>
+          <input value={input} onChange={e =>  setInput(e.target.vale)} type="text" placeholder="Type a message" />
+          <button onClick={sendMessage} type="submit">Send a message</button>
         </form>
         <MicOutlinedIcon />
       </div>
