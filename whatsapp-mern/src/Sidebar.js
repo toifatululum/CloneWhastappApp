@@ -9,7 +9,7 @@ import SidebarChat from './SidebarChat';
 
 function Sidebar() {
   return (
-    <div>
+    <div className="d-flex">
       <div className="sidebar">
         <div className="sidebar_header">
           <Avatar src="https://avatars1.githubusercontent.com/u/30462168?s=400&u=e0165ba32c06f85a31ac4a2310fb1133bdf03f5d&v=4" />

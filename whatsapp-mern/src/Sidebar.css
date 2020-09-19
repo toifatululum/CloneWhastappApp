@@ -1,7 +1,11 @@
 .sidebar {
   display: flex;
   flex-direction: column;
-  flex: 0.35;
+  flex: 0.17;
+}
+.d-flex{
+    display: flex;
+    flex-direction: column;
 }
 .room-chat{
     background-color: white;
