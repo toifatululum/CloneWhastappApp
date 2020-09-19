@@ -3,11 +3,12 @@ import mongoose from "mongoose";
 import Messages from "./db.Messages.js";
 import Pusher from "pusher";
 import cors from "cors";
+import dotenv from 'dotenv';
 
+dotenv.config()
 //app config
 const app = express();
 const port = process.env.PORT || 9000;
-
 const pusher = new Pusher({
   appId: "1069891",
   key: "e819827525f94bc5fe2d",
@@ -28,7 +29,7 @@ app.use((req, res, next) => {
 
 //DB config
 const connection_url =
-  "mongodb://admin:admin1701@cluster0-shard-00-00.mptbl.mongodb.net:27017,cluster0-shard-00-01.mptbl.mongodb.net:27017,cluster0-shard-00-02.mptbl.mongodb.net:27017/whatsapp?ssl=true&replicaSet=atlas-2xyxo7-shard-0&authSource=admin&retryWrites=true&w=majority";
+  `mongodb://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0-shard-00-00.mptbl.mongodb.net:27017,cluster0-shard-00-01.mptbl.mongodb.net:27017,cluster0-shard-00-02.mptbl.mongodb.net:27017/${process.env.DB_NAME}?ssl=true&replicaSet=atlas-2xyxo7-shard-0&authSource=admin&retryWrites=true&w=majority`;
 mongoose.connect(connection_url, {
   useCreateIndex: true,
   useUrlParser: true,
